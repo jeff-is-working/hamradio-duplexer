@@ -1,0 +1,29 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.5.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:REPLACE-WITH-UUID",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2025-01-01T00:00:00Z",
+    "authors": [
+      {
+        "name": "Jeff Records"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "project-name",
+      "version": "0.1.0",
+      "description": "Replace with project description",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    }
+  },
+  "components": []
+}

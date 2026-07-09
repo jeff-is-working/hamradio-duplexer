@@ -1,0 +1,68 @@
+# ======================
+# Node.js
+# ======================
+node_modules/
+.next/
+dist/
+build/
+*.tsbuildinfo
+.npm
+.eslintcache
+
+# ======================
+# Python
+# ======================
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+*.egg
+
+# ======================
+# Environment
+# ======================
+.env
+.env.local
+.env.*.local
+
+# ======================
+# IDE & Editors
+# ======================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ======================
+# OS Files
+# ======================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ======================
+# Testing & Coverage
+# ======================
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.nyc_output/
+
+# ======================
+# Claude Code
+# ======================
+.claude/
+
+# ======================
+# Misc
+# ======================
+*.log
+*.tmp
+*.temp
+.cache/
