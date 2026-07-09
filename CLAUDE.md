@@ -4,9 +4,32 @@ scope: Development workflow, branching, issue standards, code quality, and docum
 last_updated: 2026-03-27
 ---
 
-# CLAUDE.md — Project Standards
+# CLAUDE.md - Project Standards
 
 These instructions govern all development work in this repository. They are mandatory and override default behavior.
+
+---
+
+## What this repo is
+
+Notes, references, procedures, and per-unit logs for tuning Motorola cavity
+filtersets into duplexers for 2m, 70cm, and GMRS repeaters. Test gear: NanoVNA
+and tinySA Ultra.
+
+Domain facts to keep straight:
+- **T1480 series = VHF (132-174 MHz) -> 2m.** T1500 series = UHF (406-512 MHz)
+  -> 70cm and GMRS. These are different bands; do not conflate them.
+- Interconnect coax jumpers are electrical-length phasing sections, not patch
+  cables. Never advise reconnecting cut jumpers with arbitrary lengths.
+- `status: commissioned` in an inventory YAML requires real measured
+  `insertion_loss_db` and `isolation_db`; the validator enforces this. Do not log
+  a unit as commissioned without measurements, and never weaken that gate to make
+  data "pass".
+- Source-of-truth specs live in `docs/reference/` with citations in
+  `docs/reference/sources.md`. The two Motorola PDFs are un-OCR'd scans; treat
+  their contents as pending, not lost.
+
+Any inventory YAML change must pass `python tools/validate_inventory.py`.
 
 ---
 
