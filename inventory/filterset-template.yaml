@@ -1,0 +1,30 @@
+# Copy this file to inventory/units/<your-id>.yaml and fill in.
+# Validate with: python tools/validate_inventory.py
+# See inventory/SCHEMA.md for field rules.
+
+id: CHANGE-ME               # unique slug, e.g. t1480-4cav-a
+model: T1480                # stamped model; T148x=VHF, T150x=UHF
+band: 2m                    # 2m | 70cm | gmrs
+cavities: 4                 # positive integer
+cable_state: cut            # intact | cut | partial | rebuilt
+
+# Tunable placeholders - set to your actual repeater frequencies.
+rx_freq_mhz: 145.150        # must be in band; split must be plausible
+tx_freq_mhz: 145.750
+ctcss_hz: 100.0             # optional PL tone
+
+status: planned             # planned | cabling | tuning | commissioned | retired
+
+# Required ONLY when status: commissioned
+# insertion_loss_db: 1.5
+# isolation_db: 78
+
+# Optional records
+harness_lengths_in:         # recorded tip-to-tip jumper lengths (esp. before cutting)
+  cable_1: null
+  cable_2: null
+  cable_3: null
+  cable_4: null
+notes: >
+  Received with jumpers cut between cavities. Awaiting T1480 harness lengths
+  (OCR of Source 1 PDF) or measurement from an intact reference unit.

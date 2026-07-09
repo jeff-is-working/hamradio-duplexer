@@ -1,111 +1,72 @@
 ---
-title: Project Template README
-scope: Repository overview, setup, and usage instructions
-last_updated: 2026-03-27
+title: hamradio-duplexer README
+scope: Notes, procedures, and logs for tuning Motorola cavity duplexers
+last_updated: 2026-07-09
 ---
 
-# Project Name
+# hamradio-duplexer
 
-<!-- Replace "Project Name" above and update ORG_NAME/REPO_NAME in badge URLs below -->
+Notes, reference material, procedures, and per-unit logs for **cabling, tuning,
+and commissioning Motorola cavity filtersets** into working duplexers for
+amateur (2m, 70cm) and GMRS repeater use.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CI](https://github.com/ORG_NAME/REPO_NAME/actions/workflows/ci.yml/badge.svg)](https://github.com/ORG_NAME/REPO_NAME/actions/workflows/ci.yml)
-[![GitHub Pages](https://github.com/ORG_NAME/REPO_NAME/actions/workflows/deploy-pages.yml/badge.svg)](https://ORG_NAME.github.io/REPO_NAME)
+Test gear assumed: **NanoVNA** (S21/S11) and **tinySA Ultra** (spectrum +
+tracking source).
 
-<!-- Describe what this project does in 1-2 sentences -->
+## Hardware -> band map
 
-## Overview
+| Motorola family | Band | Repeater use | Split | Difficulty |
+|-----------------|------|--------------|-------|-----------|
+| **T1480 series** (VHF 132-174) | 2m | 144-148 | 600 kHz | Hard (near 4-cav limit) |
+| **T1500 series** (UHF 406-512) | 70cm | 440-450 | 5 MHz | Easy |
+| **T1500 series** (UHF 406-512) | GMRS | 462/467 | 5 MHz | Easy |
 
-<!-- A more detailed description of the project, its purpose, and the problem it solves -->
+Important: **T1480 = VHF, T1500 = UHF.** They are different bands. See
+`docs/reference/cross-reference.md`.
 
-## Features
-
-<!-- List the key features of the project -->
-
-- Feature one
-- Feature two
-- Feature three
-
-## Quick Start
-
-### Prerequisites
-
-<!-- List required software and versions -->
-
-- Node.js >= 20 / Python >= 3.11
-- npm / pip
-
-### Installation
-
-```bash
-git clone https://github.com/ORG_NAME/<repo-name>.git
-cd <repo-name>
-npm install   # or: pip install -r requirements.txt
-cp .env.example .env
-```
-
-### Running
-
-```bash
-npm run dev   # or: python main.py
-```
-
-## Tech Stack
-
-<!-- List the main technologies used -->
-
-| Layer     | Technology |
-| --------- | ---------- |
-| Frontend  |            |
-| Backend   |            |
-| Database  |            |
-| CI/CD     | GitHub Actions |
-| Hosting   | GitHub Pages |
-
-## Project Structure
+## Where things are
 
 ```
-.
-├── src/          # Source code
-├── tests/        # Test files
-├── docs/         # Documentation
-├── .github/      # GitHub Actions & templates
-└── ...
+docs/reference/    # Motorola specs, cross-ref, cited sources
+docs/theory/       # how pass-notch cavities and the split/isolation tradeoff work
+docs/procedures/   # cabling harness, NanoVNA tuning, tinySA tuning, commissioning
+docs/status/       # dated session status files
+projects/          # one folder per band build (2m, 70cm, gmrs) with band plans + logs
+inventory/         # per-filterset YAML logs + validator schema
+tools/             # validate_inventory.py
+tests/             # pytest for the validator
 ```
 
-## Development
+## Quick start
 
-```bash
-# Run linter
-npm run lint
+1. Read `docs/theory/pass-notch-cavities.md` and
+   `docs/theory/split-vs-isolation.md`.
+2. Identify each physical set by its stamped model
+   (`docs/reference/cross-reference.md`).
+3. Copy `inventory/filterset-template.yaml` to `inventory/units/<id>.yaml` and
+   fill it in. Validate:
+   ```bash
+   pip install -r requirements.txt
+   python tools/validate_inventory.py
+   ```
+4. Rebuild cut harnesses (`docs/procedures/cabling-harness.md`), tune
+   (`docs/procedures/tuning-nanovna.md`), commission
+   (`docs/procedures/commissioning.md`).
 
-# Run type checker
-npm run typecheck
+## Safety
 
-# Run in development mode
-npm run dev
-```
+Radio frequency energy and transmit power are involved. Never key a transmitter
+into an unterminated or half-built duplexer; terminate open ports in 50 ohms.
+Do not connect the tinySA Ultra input directly to transmit power - use an
+attenuator or coupler. Follow all licensing/coordination rules (amateur band
+coordination; FCC Part 95E for GMRS).
 
-## Testing
+## Accessibility
 
-```bash
-npm test
-```
-
-## Deployment
-
-<!-- Describe how the project is deployed -->
-
-Pushes to `main` trigger the CI workflow. On success, the deploy workflow publishes to GitHub Pages.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, commit conventions, and PR process.
-
-## Security
-
-See [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
+See [ACCESSIBILITY.md](ACCESSIBILITY.md). Docs use plain language, real tables
+(not ASCII art), and never rely on color alone.
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+MIT (see [LICENSE](LICENSE)). Third-party specs are cited to their sources in
+`docs/reference/sources.md` and archived for personal, non-commercial study.

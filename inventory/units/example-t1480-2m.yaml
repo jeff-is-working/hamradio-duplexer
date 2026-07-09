@@ -1,0 +1,19 @@
+# Example unit - safe to delete once you add real ones. Kept so CI exercises
+# the validator against at least one valid file.
+id: example-t1480-2m
+model: T1480
+band: 2m
+cavities: 4
+cable_state: cut
+rx_freq_mhz: 145.150
+tx_freq_mhz: 145.750
+ctcss_hz: 100.0
+status: planned
+harness_lengths_in:
+  cable_1: null
+  cable_2: null
+  cable_3: null
+  cable_4: null
+notes: >
+  Placeholder example. Jumpers cut between cavities. Frequencies are tunable
+  placeholders, not a coordinated pair.
